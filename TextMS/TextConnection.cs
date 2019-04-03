@@ -16,37 +16,12 @@ namespace TextMS
             ConnectionString = connectionString;
         }
 
-        public TextDataReader GetDataReader()
+        public TextDataReader GetDataReader(string TableName)
         {
-            return new TextDataReader();
+            return new TextDataReader(ConnectionString, TableName);
         }
 
-        public class TextDataReader
-        {
-            public StreamReader streamReader;
-
-            TextDataReader(string connectionString)
-            {
-                streamReader = new StreamReader(connectionString);
-            }
-
-            public bool Read()
-            {
-                return true;
-            }
-
-            public string this[string column]
-            {
-                set { }
-                get
-                {
-                    return "";
-                }
-            }
-
-
-        }
-
+        
         public void Create() { }
         public void Read<T>()
         {
