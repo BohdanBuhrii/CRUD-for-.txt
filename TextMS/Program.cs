@@ -10,8 +10,6 @@ namespace TextMS
     {
         static void Main(string[] args)
         {
-            TextConnection connection = new TextConnection(
-                @"D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\TextBase.txt");
             /*connection.DeleteTable("table2");
             //string tableName1 = "table1";
             //string[] columns1 = new string[] {"column1", "column2", "column3" };
@@ -37,6 +35,15 @@ namespace TextMS
             //Console.WriteLine(table3);
             //Console.WriteLine();
             */
+
+            //////////////////////////////////////////////////////////////////////////////////
+
+            //simple example//
+
+            TextConnection connection = new TextConnection(
+                @"D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\TextBase.txt");//path to file
+
+
             string[] newcolumns = new string[] { "newcolumn1", "newcolumn2", "newcolumn3" };
             connection.CreateTable("newtable", newcolumns);
 
