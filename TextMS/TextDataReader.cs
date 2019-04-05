@@ -9,18 +9,17 @@ namespace TextMS
 {
     public class TextDataReader : IDisposable
     {
-        
+        private TextConnection Connection;
         private StreamReader streamReader;
         private bool disposed = false;
 
         public string[] Columns { get; }
-
         private string[] currentLine;
-
 
 
         public TextDataReader(TextConnection connection, string tableName)
         {
+            this.Connection = connection;
             streamReader = new StreamReader(connection.ConnectionString);
 
             string line="";
@@ -32,13 +31,13 @@ namespace TextMS
                 tableName));
             else
             {
-                Columns = streamReader.ReadLine().Split(TextConnection.separator[0]);
+                Columns = streamReader.ReadLine().Split(connection.separator[0]);
             }
         }
 
         public bool Read()
         {
-            currentLine = streamReader.ReadLine().Split(TextConnection.separator[0]);
+            currentLine = streamReader.ReadLine().Split(Connection.separator[0]);
             if (currentLine[0] == "<end>") return false;
             else return true;
         }
@@ -57,10 +56,12 @@ namespace TextMS
                     column));
             }
         }
+
         
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)

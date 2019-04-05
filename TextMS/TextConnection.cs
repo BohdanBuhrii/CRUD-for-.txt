@@ -11,12 +11,12 @@ namespace TextMS
 
     public class TextConnection //TODO
     {
-        public static readonly string separator = "|";
+        public readonly string separator = "|";
 
         public string ConnectionString { get; }
 
 
-        public TextConnection(string connectionString)//todo
+        public TextConnection(string connectionString, string separator = "|")
         {
             ConnectionString = connectionString;
         }
@@ -26,7 +26,7 @@ namespace TextMS
             return new TextDataReader(this, TableName);
         }
 
-        public Table GetTable(string tableName)//todo
+        public Table GetTable(string tableName)
         {
             return new Table(this,tableName);
         }
@@ -42,16 +42,38 @@ namespace TextMS
             }
         }
 
-        public void UpdateTable(string tableName, string[] newColumns)
-        { }
-        //public void Read<T>()
-        //{
-
-        //}
-        //public void Update() { }
-        public void DeleteTable(string tableName)
+        public void UpdateTable(string tableName, string[] newColumns)//todo
         {
 
+        }
+        
+        public void DeleteTable(string tableName)
+        {
+            List<string> lines = new List<string>();
+            using (StreamReader reader = new StreamReader(ConnectionString))
+            {
+                string line;
+                while (!reader.EndOfStream)
+                {
+                    line = reader.ReadLine();
+
+                    if (line != string.Format("<{0}>", tableName))
+                    {
+                        lines.Add(line);
+                    }
+                    else
+                    {
+                        while (reader.ReadLine() != "<end>") ;
+                    }
+                }
+            }
+            using (StreamWriter writer = new StreamWriter(ConnectionString))
+            {
+                foreach (string _line in lines)
+                {
+                    writer.WriteLine(_line);
+                }
+            }
         }
     }
 }

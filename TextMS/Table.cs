@@ -18,14 +18,18 @@ namespace TextMS
         {
             TableName = tableName;
             Connection = connection;
+
             TextDataReader reader = new TextDataReader(connection, tableName);
             Columns = reader.Columns;
-            string[] row = new string[Columns.Length];
+
+            string[] row;
             int i = 0;
             Rows = new List<string[]>();
 
             while (reader.Read())
             {
+                row = new string[Columns.Length];
+
                 foreach (string column in Columns)
                 {
                     row[i] = reader[column];
@@ -42,7 +46,7 @@ namespace TextMS
             string result = "";
             foreach (string[] row in Rows)
             {
-                result += string.Join("|", row) + "\n";
+                result += string.Join(Connection.separator, row) + "\n";
             }
             return result;
         }
@@ -51,7 +55,7 @@ namespace TextMS
         {
             string result="";
             result += string.Format("<{0}>\n",TableName);
-            result += string.Join("|", Columns) + "\n";
+            result += string.Join(Connection.separator, Columns) + "\n";
             result += GetContent();
             result += "<end>";
             return result;
