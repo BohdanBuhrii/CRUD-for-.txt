@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace TextMS
 {
-    public class TextDataReader
+    public class TextDataReader : IDisposable
     {
-        private readonly char separator = '|';
+        
         private StreamReader streamReader;
-
+        private bool disposed = false;
 
         public string[] Columns { get; }
 
@@ -32,13 +32,13 @@ namespace TextMS
                 tableName));
             else
             {
-                Columns = streamReader.ReadLine().Split(separator);
+                Columns = streamReader.ReadLine().Split(TextConnection.separator[0]);
             }
         }
 
         public bool Read()
         {
-            currentLine = streamReader.ReadLine().Split(separator);
+            currentLine = streamReader.ReadLine().Split(TextConnection.separator[0]);
             if (currentLine[0] == "<end>") return false;
             else return true;
         }
@@ -57,8 +57,30 @@ namespace TextMS
                     column));
             }
         }
+        
+        public void Dispose()
+        {
+            Dispose(true);
+        }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    
+                   streamReader.Dispose();
+                }
 
+                disposed = true;
+            }
+        }
+
+        ~TextDataReader()
+        {
+            Dispose(false);
+        }
     }
 
 }

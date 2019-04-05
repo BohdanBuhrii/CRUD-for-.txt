@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace TextMS
 {
+    
+
     public class TextConnection //TODO
     {
+        public static readonly string separator = "|";
+
         public string ConnectionString { get; }
+
 
         public TextConnection(string connectionString)//todo
         {
@@ -32,7 +37,7 @@ namespace TextMS
             using (StreamWriter streamWriter= new StreamWriter(ConnectionString, true))
             {
                 streamWriter.WriteLine(string.Format("<{0}>", tableName));
-                streamWriter.WriteLine(string.Join("|", columns));
+                streamWriter.WriteLine(string.Join(separator, columns));
                 streamWriter.WriteLine("<end>");
             }
         }
@@ -44,7 +49,9 @@ namespace TextMS
 
         //}
         //public void Update() { }
-        public void DeleteTable()
-        { }
+        public void DeleteTable(string tableName)
+        {
+
+        }
     }
 }
