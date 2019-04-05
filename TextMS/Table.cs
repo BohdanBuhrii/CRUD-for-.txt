@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,13 @@ namespace TextMS
         public string TableName { get; }
         public string[] Columns { get; }
         public List<string[]> Rows { get; }
-        public bool Changed { get; }
+        private bool Changed = false;
 
         public Table(TextConnection connection, string tableName)
         {
             TableName = tableName;
             Connection = connection;
+            Rows = new List<string[]>();
 
             using (TextDataReader reader = new TextDataReader(connection, tableName))
             {
@@ -25,8 +27,7 @@ namespace TextMS
 
                 string[] row;
                 int i = 0;
-                Rows = new List<string[]>();
-
+                
                 while (reader.Read())
                 {
                     row = new string[Columns.Length];
@@ -56,6 +57,8 @@ namespace TextMS
 
         public void Create(params string[] newObject)
         {
+            Changed = true;
+
             int len = Columns.Length;
             string[] row = new string[len];
             int i = 0;
@@ -71,9 +74,10 @@ namespace TextMS
                 row[i] = "null";
                 i++;
             }
+            Rows.Add(row);
         }
 
-        public List<string[]> Read(string column, string condition)//todo
+        public List<string[]> Read(string column, string condition)
         {
             List<string[]> result = new List<string[]>();
             if (!Columns.Contains(column)) throw new Exception("Column not found");
@@ -83,7 +87,7 @@ namespace TextMS
 
             foreach (string[] row in Rows)
             {
-                if (row[columnIndex] == condition) Rows.Remove(row);
+                if (row[columnIndex] == condition) result.Add(row);
             }
 
             return result;
@@ -91,22 +95,26 @@ namespace TextMS
 
         public void Update(string column, string condition, params string[] newObject)
         {
+            Changed = true;
+
             Delete(column, condition);
             Create(newObject);
         }
 
         public void Delete(string column, string condition)
         {
+            Changed = true;
+
             if (!Columns.Contains(column)) throw new Exception("Column not found");
             int columnIndex = 0;
             while (Columns[columnIndex] != column) columnIndex++;
 
-            foreach (string[] row in Rows)
+            for (int i=0;i<Rows.Count;)
             {
-                if (row[columnIndex] == condition) Rows.Remove(row);
+                if (Rows[i][columnIndex] == condition) Rows.Remove(Rows[i]);
+                else i++;
             }
         }
-
 
         public override string ToString()
         {
@@ -118,11 +126,25 @@ namespace TextMS
             return result;
         }
 
-        public void ExecuteChanges()//todo
+        public void ExecuteChanges()
         {
             if (this.Changed)
             {
+                Connection.DeleteTable(TableName);
+                using (StreamWriter writer = new StreamWriter(Connection.ConnectionString, true))
+                {
+                    //writer. (this.ToString());
+                    writer.WriteLine(string.Format("<{0}>\n", TableName));
 
+                    writer.WriteLine(string.Join(Connection.separator, Columns));
+
+                    foreach (string[] row in Rows)
+                    {
+                        writer.WriteLine(string.Join(Connection.separator, row));
+                    }
+
+                    writer.WriteLine("<end>");
+                }
             }
         }
     }

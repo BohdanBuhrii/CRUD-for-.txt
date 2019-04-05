@@ -12,7 +12,7 @@ namespace TextMS
         {
             TextConnection connection = new TextConnection(
                 @"D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\TextBase.txt");
-            connection.DeleteTable("table2");
+            /*connection.DeleteTable("table2");
             //string tableName1 = "table1";
             //string[] columns1 = new string[] {"column1", "column2", "column3" };
             //connection.CreateTable(tableName,columns);
@@ -36,7 +36,19 @@ namespace TextMS
             //Console.WriteLine();
             //Console.WriteLine(table3);
             //Console.WriteLine();
-            
+            */
+            string[] newcolumns = new string[] { "newcolumn1", "newcolumn2", "newcolumn3" };
+            connection.CreateTable("newtable", newcolumns);
+
+            Table table = connection.GetTable("newtable");
+            table.Create("inew1", "inew2", "inew3");
+            table.Create("inew4", "inew5", "inew6");
+            table.Create("inew7", "inew8", "inew9");
+
+            table.Delete("newcolumn2", "inew5");
+            Console.WriteLine(string.Join(" ",table.Read("newcolumn1", "inew7")[0]));
+
+            table.ExecuteChanges();
 
             Console.WriteLine("done");
             Console.Read();
