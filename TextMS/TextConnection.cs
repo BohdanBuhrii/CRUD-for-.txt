@@ -7,27 +7,44 @@ using System.Threading.Tasks;
 
 namespace TextMS
 {
-    class TextConnection //TODO
+    public class TextConnection //TODO
     {
-        private readonly string ConnectionString;
+        public string ConnectionString { get; }
 
-        public TextConnection(string connectionString)
+        public TextConnection(string connectionString)//todo
         {
             ConnectionString = connectionString;
         }
 
         public TextDataReader GetDataReader(string TableName)
         {
-            return new TextDataReader(ConnectionString, TableName);
+            return new TextDataReader(this, TableName);
         }
 
-        
-        public void Create() { }
-        public void Read<T>()
+        public Table GetTable(string tableName)//todo
         {
-
+            return new Table(this,tableName);
         }
-        public void Update() { }
-        public void Delete() { }
+        
+        public void CreateTable(string tableName, string[] columns)//todo
+        {
+            //need checking if table exist
+            using (StreamWriter streamWriter= new StreamWriter(ConnectionString, true))
+            {
+                streamWriter.WriteLine(string.Format("<{0}>", tableName));
+                streamWriter.WriteLine(string.Join("|", columns));
+                streamWriter.WriteLine("<end>");
+            }
+        }
+
+        public void UpdateTable(string tableName, string[] newColumns)
+        { }
+        //public void Read<T>()
+        //{
+
+        //}
+        //public void Update() { }
+        public void DeleteTable()
+        { }
     }
 }

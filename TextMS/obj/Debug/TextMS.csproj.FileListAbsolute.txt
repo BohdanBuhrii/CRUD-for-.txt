@@ -1,0 +1,7 @@
+D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\bin\Debug\TextMS.exe.config
+D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\bin\Debug\TextMS.exe
+D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\bin\Debug\TextMS.pdb
+D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\obj\Debug\TextMS.csprojAssemblyReference.cache
+D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\obj\Debug\TextMS.csproj.CoreCompileInputs.cache
+D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\obj\Debug\TextMS.exe
+D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\obj\Debug\TextMS.pdb

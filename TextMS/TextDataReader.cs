@@ -19,9 +19,9 @@ namespace TextMS
 
 
 
-        public TextDataReader(string connectionString, string tableName)
+        public TextDataReader(TextConnection connection, string tableName)
         {
-            streamReader = new StreamReader(connectionString);
+            streamReader = new StreamReader(connection.ConnectionString);
 
             string line="";
             while (line != string.Format("<{0}>", tableName))
