@@ -19,25 +19,27 @@ namespace TextMS
             TableName = tableName;
             Connection = connection;
 
-            TextDataReader reader = new TextDataReader(connection, tableName);
-            Columns = reader.Columns;
-
-            string[] row;
-            int i = 0;
-            Rows = new List<string[]>();
-
-            while (reader.Read())
+            using (TextDataReader reader = new TextDataReader(connection, tableName))
             {
-                row = new string[Columns.Length];
+                Columns = reader.Columns;
 
-                foreach (string column in Columns)
+                string[] row;
+                int i = 0;
+                Rows = new List<string[]>();
+
+                while (reader.Read())
                 {
-                    row[i] = reader[column];
-                    i++;
-                }
+                    row = new string[Columns.Length];
 
-                Rows.Add(row);
-                i = 0;
+                    foreach (string column in Columns)
+                    {
+                        row[i] = reader[column];
+                        i++;
+                    }
+
+                    Rows.Add(row);
+                    i = 0;
+                }
             }
         }
 
@@ -50,6 +52,61 @@ namespace TextMS
             }
             return result;
         }
+
+
+        public void Create(params string[] newObject)
+        {
+            int len = Columns.Length;
+            string[] row = new string[len];
+            int i = 0;
+            
+            foreach (string item in newObject)
+            {
+                row[i] = item;
+                i++;
+                if (i == len) break;
+            }
+            while (i<len)
+            {
+                row[i] = "null";
+                i++;
+            }
+        }
+
+        public List<string[]> Read(string column, string condition)//todo
+        {
+            List<string[]> result = new List<string[]>();
+            if (!Columns.Contains(column)) throw new Exception("Column not found");
+
+            int columnIndex = 0;
+            while (Columns[columnIndex] != column) columnIndex++;
+
+            foreach (string[] row in Rows)
+            {
+                if (row[columnIndex] == condition) Rows.Remove(row);
+            }
+
+            return result;
+        }
+
+        public void Update(string column, string condition, params string[] newObject)
+        {
+            Delete(column, condition);
+            Create(newObject);
+        }
+
+        public void Delete(string column, string condition)
+        {
+            if (!Columns.Contains(column)) throw new Exception("Column not found");
+            int columnIndex = 0;
+            while (Columns[columnIndex] != column) columnIndex++;
+
+            foreach (string[] row in Rows)
+            {
+                if (row[columnIndex] == condition) Rows.Remove(row);
+            }
+        }
+
 
         public override string ToString()
         {

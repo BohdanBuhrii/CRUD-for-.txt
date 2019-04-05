@@ -42,7 +42,7 @@ namespace TextMS
             }
         }
 
-        public void UpdateTable(string tableName, string[] newColumns)//todo
+        public void UpdateTable(string tableName, string[] newColumns)//todo(now do nothing)
         {
 
         }
