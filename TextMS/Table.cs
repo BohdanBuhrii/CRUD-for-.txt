@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TextMS
 {
@@ -13,7 +11,7 @@ namespace TextMS
         public string TableName { get; }
         public string[] Columns { get; }
         public List<string[]> Rows { get; }
-        private bool Changed = false;
+        private bool Changed = false; //represent if table was changed
 
         public Table(TextConnection connection, string tableName)
         {
@@ -44,6 +42,7 @@ namespace TextMS
             }
         }
 
+        //returns all rows from table in special format
         public string GetContent()
         {
             string result = "";
@@ -54,7 +53,7 @@ namespace TextMS
             return result;
         }
 
-
+        //in SQL: INSERT INTO TableName VALUES (newObject)
         public void Create(params string[] newObject)
         {
             Changed = true;
@@ -77,6 +76,7 @@ namespace TextMS
             Rows.Add(row);
         }
 
+        //in SQL: SELECT * FROM TableName WHERE column = condition
         public List<string[]> Read(string column, string condition)
         {
             List<string[]> result = new List<string[]>();
@@ -93,6 +93,7 @@ namespace TextMS
             return result;
         }
 
+        //something like UPDATE in SQL
         public void Update(string column, string condition, params string[] newObject)
         {
             Changed = true;
@@ -101,6 +102,7 @@ namespace TextMS
             Create(newObject);
         }
 
+        //in SQL: DELETE FROM TableNane WHERE column = condition
         public void Delete(string column, string condition)
         {
             Changed = true;
@@ -126,6 +128,9 @@ namespace TextMS
             return result;
         }
 
+        //IMPORTANT!!!
+        //applies changes from table to textbase,
+        //recomended to use it for each table at the end of program
         public void ExecuteChanges()
         {
             if (this.Changed)

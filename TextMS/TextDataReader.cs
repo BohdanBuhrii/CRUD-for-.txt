@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TextMS
 {
@@ -11,8 +7,7 @@ namespace TextMS
     {
         private TextConnection Connection;
         private StreamReader streamReader;
-        private bool disposed = false;
-
+        
         public string[] Columns { get; }
         private string[] currentLine;
 
@@ -35,6 +30,7 @@ namespace TextMS
             }
         }
 
+        //move current line to the next line
         public bool Read()
         {
             currentLine = streamReader.ReadLine().Split(Connection.separator[0]);
@@ -42,6 +38,7 @@ namespace TextMS
             else return true;
         }
 
+        //Used to access the columns from the currentLine
         public string this[string column]
         {
             get
@@ -57,7 +54,10 @@ namespace TextMS
             }
         }
 
-        
+        //IDisposable interface realization: 
+
+        private bool disposed = false;
+
         public void Dispose()
         {
             Dispose(true);

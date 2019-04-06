@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace TextMS
 {
@@ -13,7 +10,7 @@ namespace TextMS
     {
         public readonly string separator = "|";
 
-        public string ConnectionString { get; }
+        public string ConnectionString { get; } //path to .txt file (textbase)
 
 
         public TextConnection(string connectionString, string separator = "|")
@@ -31,6 +28,7 @@ namespace TextMS
             return new Table(this,tableName);
         }
         
+        //add new table to textbase
         public void CreateTable(string tableName, string[] columns)//todo
         {
             //need checking if table exist
@@ -42,11 +40,13 @@ namespace TextMS
             }
         }
 
+        //redesign an exist table
         public void UpdateTable(string tableName, string[] newColumns)//todo(now do nothing)
         {
 
         }
         
+        //delete table
         public void DeleteTable(string tableName)
         {
             List<string> lines = new List<string>();

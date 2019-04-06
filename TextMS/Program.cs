@@ -52,10 +52,10 @@ namespace TextMS
             table.Create("inew4", "inew5", "inew6");
             table.Create("inew7", "inew8", "inew9");
 
-            table.Delete("newcolumn2", "inew5");
+            table.Delete("newcolumn2", "inew5"); 
             Console.WriteLine(string.Join(" ",table.Read("newcolumn1", "inew7")[0]));
 
-            table.ExecuteChanges();
+            table.ExecuteChanges();//used to save changes to textbase
 
             Console.WriteLine("done");
             Console.Read();
