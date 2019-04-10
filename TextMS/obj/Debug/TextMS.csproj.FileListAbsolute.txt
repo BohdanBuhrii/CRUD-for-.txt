@@ -5,3 +5,10 @@ D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\o
 D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\obj\Debug\TextMS.csproj.CoreCompileInputs.cache
 D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\obj\Debug\TextMS.exe
 D:\USERS\Buhrii_B\C#\Програмне забезпечення\TextMS\TextMS\obj\Debug\TextMS.pdb
+C:\Users\Home\Desktop\task04\CRUD-for-.txt\TextMS\bin\Debug\TextMS.exe.config
+C:\Users\Home\Desktop\task04\CRUD-for-.txt\TextMS\bin\Debug\TextMS.exe
+C:\Users\Home\Desktop\task04\CRUD-for-.txt\TextMS\bin\Debug\TextMS.pdb
+C:\Users\Home\Desktop\task04\CRUD-for-.txt\TextMS\obj\Debug\TextMS.csprojAssemblyReference.cache
+C:\Users\Home\Desktop\task04\CRUD-for-.txt\TextMS\obj\Debug\TextMS.csproj.CoreCompileInputs.cache
+C:\Users\Home\Desktop\task04\CRUD-for-.txt\TextMS\obj\Debug\TextMS.exe
+C:\Users\Home\Desktop\task04\CRUD-for-.txt\TextMS\obj\Debug\TextMS.pdb
