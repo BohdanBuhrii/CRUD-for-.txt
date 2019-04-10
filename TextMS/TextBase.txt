@@ -12,3 +12,17 @@ j9|j10|j11|j12
 j13|j14|j15|j16
 <end>
 
+<University>
+
+name|rating|city
+Lviv National University of Ivan Franko|100|Lviv
+Ukrainian Catholic University|90|Lviv
+National University of 'Kyiv-Mohyla Academy'|95|Kyiv
+<end>
+<Subject>
+
+subj_name|semester
+Mathematical analysis|3
+English|4
+Database SQL|2
+<end>

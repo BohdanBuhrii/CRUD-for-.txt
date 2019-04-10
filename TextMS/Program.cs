@@ -8,11 +8,9 @@ namespace TextMS
 {
     class Program
     {
-        static void CreateTables()
+        static void CreateTables(TextConnection connection)
         {
-            TextConnection connection = new TextConnection(
-              @"C:\Users\Home\Desktop\c sharp\Task03\Task03\textbase.txt");  //path to file
-
+            
             string tableName1 = "University";
             string[] newcolumns1 = new string[] { "name", "rating", "city" };
             connection.CreateTable(tableName1, newcolumns1);
@@ -35,11 +33,16 @@ namespace TextMS
 
             table2.ExecuteChanges();
         }
+
         static void Main(string[] args)
         {
-            CreateTables();
+            TextConnection connection = new TextConnection(
+              @"C:\Users\Home\Desktop\c sharp\Task03\Task03\textbase.txt");  //path to file
 
-            Menu menu = new Menu();
+
+            CreateTables(connection);
+
+            Menu menu = new Menu(connection);
         }
     }
 }

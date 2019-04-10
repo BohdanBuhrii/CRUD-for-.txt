@@ -8,10 +8,9 @@ namespace TextMS
 {
     class Menu
     {
-        public Menu()
+        public Menu(TextConnection connection)
         {
-            TextConnection connection = new TextConnection(
-                @"C:\Users\Home\Desktop\c sharp\Task03\Task03\textbase.txt");         //path to file
+            
             int choice = 0;
             while (choice != 5)
             {
