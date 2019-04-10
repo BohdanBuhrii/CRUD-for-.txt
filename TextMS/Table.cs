@@ -151,6 +151,7 @@ namespace TextMS
                     writer.WriteLine("<end>");
                 }
             }
+            Changed = false;
         }
     }
 }
