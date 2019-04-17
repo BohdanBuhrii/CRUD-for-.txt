@@ -37,7 +37,7 @@ namespace TextMS
         static void Main(string[] args)
         {
             TextConnection connection = new TextConnection(
-              @"C:\Users\Home\Desktop\c sharp\Task03\Task03\textbase.txt");  //path to file
+              @"\..\..\TextBase.txt");  //path to file
 
 
             CreateTables(connection);
