@@ -139,7 +139,7 @@ namespace TextMS
                 using (StreamWriter writer = new StreamWriter(Connection.ConnectionString, true))
                 {
                     //writer. (this.ToString());
-                    writer.WriteLine(string.Format("<{0}>\n", TableName));
+                    writer.WriteLine(string.Format("<{0}>", TableName));
 
                     writer.WriteLine(string.Join(Connection.separator, Columns));
 
