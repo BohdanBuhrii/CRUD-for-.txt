@@ -36,8 +36,8 @@ namespace TextMS
 
         static void Main(string[] args)
         {
-            TextConnection connection = new TextConnection(@"\..\..\TextBase.txt"); //path to file
 
+            TextConnection connection = new TextConnection(@"\..\..\TextBase.txt"); //path to file
 
             CreateTables(connection);
 
