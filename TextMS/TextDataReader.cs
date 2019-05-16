@@ -26,14 +26,14 @@ namespace TextMS
                 tableName));
             else
             {
-                Columns = streamReader.ReadLine().Split(connection.separator[0]);
+                Columns = Helper.Split(streamReader.ReadLine(),connection.separator[0]);
             }
         }
 
         //move current line to the next line
         public bool Read()
         {
-            currentLine = streamReader.ReadLine().Split(Connection.separator[0]);
+            currentLine = Helper.Split(streamReader.ReadLine(),Connection.separator[0]);
             if (currentLine[0] == "<end>") return false;
             else return true;
         }

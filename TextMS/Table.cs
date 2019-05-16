@@ -48,7 +48,7 @@ namespace TextMS
             string result = "";
             foreach (string[] row in Rows)
             {
-                result += string.Join(Connection.separator, row) + "\n";
+                result += Helper.Join(Connection.separator, row) + "\n";
             }
             return result;
         }
@@ -141,11 +141,11 @@ namespace TextMS
                     //writer. (this.ToString());
                     writer.WriteLine(string.Format("<{0}>", TableName));
 
-                    writer.WriteLine(string.Join(Connection.separator, Columns));
+                    writer.WriteLine(Helper.Join(Connection.separator, Columns));
 
                     foreach (string[] row in Rows)
                     {
-                        writer.WriteLine(string.Join(Connection.separator, row));
+                        writer.WriteLine(Helper.Join(Connection.separator, row));
                     }
 
                     writer.WriteLine("<end>");

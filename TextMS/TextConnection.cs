@@ -35,7 +35,7 @@ namespace TextMS
             using (StreamWriter streamWriter= new StreamWriter(ConnectionString, true))
             {
                 streamWriter.WriteLine(string.Format("<{0}>", tableName));
-                streamWriter.WriteLine(string.Join(separator, columns));
+                streamWriter.WriteLine(Helper.Join(separator, columns));
                 streamWriter.WriteLine("<end>");
             }
         }
